@@ -51,10 +51,12 @@ Run the server in another terminal or hardware. Then, run the client.
 
 ## Code examples
 The examples are organized in folders:
-* [00_printer](00_printer) contains an example (based on the one given [here][ice-hello-world]) where the client sends to the server a message to be 'printed' via terminal.
+* [00_printer](00_printer) contains an example (based on the one given [here][ice-hello-world]) where the client sends to the server a message to be "printed" via terminal.
+<!---
 * [CD22_23-P04_basic_calculator](CD22_23-P04_basic_calculator) is the solution to the first lab exercise where the client sends two values to a single server (the calculator) which does all the operations and returns the result.
 * [CD22_23-P05_1_calculator_pro](CD22_23-P05_1_calculator_pro) is the solution to the second lab exercise. The client receives the IP addresses and ports of the servers via the terminal. One server performs addition and subtraction and the other division and multiplication, each returning the result to the client.
 * [CD22_23-P05_2_bank](CD22_23-P05_2_bank) as an example of a simulation of a real-life problem or situation. It requires the compilers `slice2py` (currently under the Anaconda environment) and `slice2cpp` (installations details can be found [here][ice-cpp]). Makefile included. Only localhost.
+-->
 
 ## License
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
