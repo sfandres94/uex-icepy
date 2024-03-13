@@ -106,7 +106,7 @@ def main(args: argparse.Namespace) -> bool:
         add_sub_servant = AddSubServerI()                                                       # Create the instances of the classes.
         mul_div_servant = MulDivServerI()
 
-        add_sub_proxy = adapter.add(add_sub_servant,communicator.stringToIdentity('AddSub'))   # Add the servant instances to the adapter with each of the identities.
+        add_sub_proxy = adapter.add(add_sub_servant,communicator.stringToIdentity('AddSub'))    # Add the servant instances to the adapter with each of the identities.
         mul_div_proxy = adapter.add(mul_div_servant, communicator.stringToIdentity('MulDiv'))
 
         adapter.activate()                                                                      # Activate the adapter to make the servant available for incoming requests.
