@@ -1,5 +1,9 @@
-"""Client script that sends two numbers to a server
-   and displays the result received in the terminal.
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Client script that sends two numbers to a server
+and displays the result received in the terminal.
 
 Usage: client.py [-h] [--host HOST] [--port PORT] [--number1 NUMBER1] [--number2 NUMBER2]
 

@@ -1,4 +1,8 @@
-"""Server script that displays a received text in the terminal.
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Server script that displays a received text in the terminal.
 
 Usage: server.py [-h] [--port PORT]
 

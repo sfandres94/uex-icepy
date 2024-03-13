@@ -1,5 +1,9 @@
-"""Server script that displays in the terminal the two numbers received,
-   calculates the result and returns it to the client.
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Server script that displays in the terminal the two numbers received,
+calculates the result and returns it to the client.
 
 Usage: server.py [-h] [--port PORT]
 

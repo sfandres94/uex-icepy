@@ -1,4 +1,8 @@
-"""Client script that sends a text to a server.
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Client script that sends a text to a server.
 
 Usage: client.py [-h] [--host HOST] [--port PORT] [--text]
 
