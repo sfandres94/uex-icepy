@@ -46,7 +46,7 @@ Compile the Slice definition to generate Python proxies and skeletons:
 ```
 slice2py <filename>.ice
 ```
-where `<filename>` is the name of the target Slice definitions.
+where `<filename>` must be replaced by the name of the target Slice definitions.
 
 Run the server in another terminal or hardware. Then, run the client.
 
