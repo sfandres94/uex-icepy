@@ -66,7 +66,7 @@ def main(args: argparse.Namespace) -> bool:
 
         proxy = communicator.stringToProxy(                                                     # Create a proxy for the 'SimplePrinter' object, which can be communicated
             f'SimplePrinter:default -h {args.host} -p {args.port}'                              # with via the host with the IP address or localhost using the specified
-        )                                                                                       # port number and the default communication protocol.       
+        )                                                                                       # port number and the default communication protocol.
 
         server = Printer.OperationPrx.checkedCast(proxy)                                        # Cast the given 'proxy' to a 'Operation' proxy and assign the resulting
         if not server:                                                                          # object to the variable 'server'. This allows communication with the
