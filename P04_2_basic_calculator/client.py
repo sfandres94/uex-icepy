@@ -5,7 +5,7 @@
 Client script that sends two numbers to a server
 and displays the result received in the terminal.
 
-Usage: client.py [-h] [--host HOST] [--port PORT] [--number1 NUMBER1] [--number2 NUMBER2]
+Usage: client.py [-h] [--host HOST] [--port PORT]
 
 Basic calculator client script.
 
@@ -14,10 +14,6 @@ options:
   --host HOST, -ht HOST
                         Communication via the host. Use localhost (default) or give an IP address (e.g., 192.168.1.140).
   --port PORT, -p PORT  Port number. Use port 10000 (default) onwards.
-  --number1 NUMBER1, -n1 NUMBER1
-                        First number.
-  --number2 NUMBER2, -n2 NUMBER2
-                        Second number.
 
 Author: Andres J. Sanchez-Fernandez
 Email: sfandres@unex.es
@@ -47,12 +43,6 @@ def get_args() -> argparse.Namespace:
     parser.add_argument('--port', '-p', type=int, default=10000,
                         help='Port number. Use port 10000 (default) onwards.')
 
-    parser.add_argument('--number1', '-n1', type=float, default=None,
-                        help='First number.')
-
-    parser.add_argument('--number2', '-n2', type=float, default=None,
-                        help='Second number.')
-
     return parser.parse_args(sys.argv[1:])                                                      # Parse and return the arguments.
 
 
@@ -66,11 +56,10 @@ def main(args: argparse.Namespace) -> bool:
     Returns:
         A boolean indicating the success of the process.
     """
-    if args.number1==None or args.number2==None:                                                # If the numbers are not given as arguments, ask for them.
-        args.number1 = float(input('Enter the first number: '))
-        args.number2 = float(input('Enter the second number: '))
+    number1 = float(input('Enter the first number: '))
+    number2 = float(input('Enter the second number: '))
  
-    print(f'Numbers: {args.number1} and {args.number2}')                                        # Print the numbers to be sent to the server.
+    print(f'Numbers: {number1} and {number2}')                                                  # Print the numbers to be sent to the server.
     print(f'Host: {args.host} (connecting port: {args.port})')                                  # Print the host address and port number.
 
     with Ice.initialize(sys.argv) as communicator:                                              # Initialize the Ice run time and create a communicator.
@@ -83,10 +72,10 @@ def main(args: argparse.Namespace) -> bool:
         if not server:                                                                          # object to the variable 'server'. This allows communication with the
             raise RuntimeError('Invalid proxy')                                                 # remote 'Operations' object via the 'server' object.
 
-        print(f'Result of add.: {server.add(args.number1, args.number2)}')                      # Call the methods on the 'server' object, passing the 'number1' and 'number2'.
-        print(f'Result of sub.: {server.subtract(args.number1, args.number2)}')                             
-        print(f'Result of mul.: {server.multiply(args.number1, args.number2)}')
-        print(f'Result of div.: {server.divide(args.number1, args.number2)}')
+        print(f'Result of add.: {server.add(number1, number2)}')                                # Call the methods on the 'server' object, passing the 'number1' and 'number2'.
+        print(f'Result of sub.: {server.subtract(number1, number2)}')                             
+        print(f'Result of mul.: {server.multiply(number1, number2)}')
+        print(f'Result of div.: {server.divide(number1, number2)}')
 
     return 0
 
