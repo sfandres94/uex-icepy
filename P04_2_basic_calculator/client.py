@@ -1,77 +1,92 @@
 """Client script that sends two numbers to a server
    and displays the result received in the terminal.
 
-Usage: client.py [-h] [--port PORT] [--host HOST] [--num1 NUM1] [--num2 NUM2]
+Usage: client.py [-h] [--host HOST] [--port PORT] [--number1 NUMBER1] [--number2 NUMBER2]
 
-Client script.
+Basic calculator client script.
 
 options:
-  -h, --help             show this help message and exit
-  --port PORT, -p PORT   port number. Use port 10000 (default) onwards.
-  --host HOST, -ht HOST  communication via the host. Use localhost (default) or give an IP address (e.g., 192.168.1.140).
-  --num1 NUM1, -n1 NUM1  first number.
-  --num2 NUM2, -n2 NUM2  second number.
+  -h, --help            show this help message and exit
+  --host HOST, -ht HOST
+                        Communication via the host. Use localhost (default) or give an IP address (e.g., 192.168.1.140).
+  --port PORT, -p PORT  Port number. Use port 10000 (default) onwards.
+  --number1 NUMBER1, -n1 NUMBER1
+                        First number.
+  --number2 NUMBER2, -n2 NUMBER2
+                        Second number.
 
-Author:
-    A.J. Sanchez-Fernandez - 13/03/2023
+Author: Andres J. Sanchez-Fernandez
+Email: sfandres@unex.es
+Date: 2024-03-13
+Version: v1
 """
 
 
-# Import the sys and Ice libraries.
-import sys, Ice
-
-# Import the Calculator module.
-import Calculator
-
-# Add a path to a custom argparse module.
-sys.path.append('../')
-from modules import custom_argparse
+import sys, Ice                                                                                 # Import the sys and Ice libraries (Ice runtime).
+import Calculator                                                                               # Import the Calculator module (proxies and skeletons).
+import argparse                                                                                 # Import the argparse library for cmd arguments.
 
 
-# Main function.
-def main():
+def get_args() -> argparse.Namespace:
+    """
+    Parse and retrieve command-line arguments.
 
-    # Get command line arguments using the custom_argparse module.
-    args = custom_argparse.get_args(description='Client script.',
-                                    role='client',
-                                    example='calculator',
-                                    argv=sys.argv)
+    Returns:
+        An 'argparse.Namespace' object containing the parsed arguments.
+    """
+    parser = argparse.ArgumentParser(description='Basic calculator client script.')             # Parser creation and description.
 
-    # Get the hostname, port number and numbers from the command line arguments.
-    host = args.host
-    port = args.port
-    num1 = args.num1
-    num2 = args.num2
+    parser.add_argument('--host', '-ht', type=str, default='localhost',                         # Options.
+                        help=('Communication via the host. Use localhost (default) '
+                             'or give an IP address (e.g., 192.168.1.140).'))
+
+    parser.add_argument('--port', '-p', type=int, default=10000,
+                        help='Port number. Use port 10000 (default) onwards.')
+
+    parser.add_argument('--number1', '-n1', type=float, default=None,
+                        help='First number.')
+
+    parser.add_argument('--number2', '-n2', type=float, default=None,
+                        help='Second number.')
+
+    return parser.parse_args(sys.argv[1:])                                                      # Parse and return the arguments.
+
+
+def main(args: argparse.Namespace) -> bool:
+    """
+    Main function.
+
+    Args:
+        args: An 'argparse.Namespace' object containing the parsed arguments.
     
-    if num1==None or num2==None:
-        num1 = float(input('Enter the first number: '))
-        num2 = float(input('Enter the second number: '))
+    Returns:
+        A boolean indicating the success of the process.
+    """
+    if args.number1==None or args.number2==None:                                                # If the numbers are not given as arguments, ask for them.
+        args.number1 = float(input('Enter the first number: '))
+        args.number2 = float(input('Enter the second number: '))
  
-    # Print the host address and port number.
-    print(f'Host: {host} (connecting port: {port})')
+    print(f'Numbers: {args.number1} and {args.number2}')                                        # Print the numbers to be sent to the server.
+    print(f'Host: {args.host} (connecting port: {args.port})')                                  # Print the host address and port number.
 
-    # Initialize the Ice communicator.
-    with Ice.initialize(sys.argv) as communicator:
+    with Ice.initialize(sys.argv) as communicator:                                              # Initialize the Ice run time and create a communicator.
 
-        # Create a proxy for the 'BasicCalculator' object, which can be communicated
-        # with via the host with the IP address or localhost using the specified
-        # port number and the default communication protocol.
-        proxy = communicator.stringToProxy(f'BasicCalculator:default -h {host} -p {port}')
+        proxy = communicator.stringToProxy(                                                     # Create a proxy for the 'BasicCalculator' object, which can be communicated
+            f'BasicCalculator:default -h {args.host} -p {args.port}'                            # with via the host with the IP address or localhost using the specified
+        )                                                                                       # port number and the default communication protocol.
 
-        # Cast the given 'proxy' to a 'Operations' proxy and assign the resulting object to the variable
-        # 'server'. This allows communication with the remote 'Operations' object via the 'server' object.
-        server = Calculator.OperationsPrx.checkedCast(proxy)
-        if not server:
-            raise RuntimeError('Invalid proxy')
-    
-        # Call the functions on the 'server' object.
-        print(f'Result of add.: {server.add(num1, num2)}')
-        print(f'Result of sub.: {server.subtract(num1, num2)}')
-        print(f'Result of mul.: {server.multiply(num1, num2)}')
-        print(f'Result of div.: {server.divide(num1, num2)}')
+        server = Calculator.OperationsPrx.checkedCast(proxy)                                    # Cast the given 'proxy' to a 'Operations' proxy and assign the resulting
+        if not server:                                                                          # object to the variable 'server'. This allows communication with the
+            raise RuntimeError('Invalid proxy')                                                 # remote 'Operations' object via the 'server' object.
+
+        print(f'Result of add.: {server.add(args.number1, args.number2)}')                      # Call the methods on the 'server' object, passing the 'number1' and 'number2'.
+        print(f'Result of sub.: {server.subtract(args.number1, args.number2)}')                             
+        print(f'Result of mul.: {server.multiply(args.number1, args.number2)}')
+        print(f'Result of div.: {server.divide(args.number1, args.number2)}')
 
     return 0
 
-# Call the main function to execute the program.
+
 if __name__ == '__main__':
-    sys.exit(main())
+    args = get_args()                                                                           # Parse and retrieve command-line arguments.
+    sys.exit(main(args))
