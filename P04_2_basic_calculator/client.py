@@ -82,4 +82,4 @@ def main(args: argparse.Namespace) -> bool:
 
 if __name__ == '__main__':
     args = get_args()                                                                           # Parse and retrieve command-line arguments.
-    sys.exit(main(args))
+    sys.exit(main(args))                                                                        # Call the main function and exit with the returned status code.
