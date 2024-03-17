@@ -55,9 +55,7 @@ The examples are organized in folders:
 * [P04_1_printer](P04_1_printer) contains an example (based on the one given [here][ice-hello-world]) where the client sends to the server a message to be "printed" via the terminal.
 * [P04_2_basic_calculator](P04_2_basic_calculator) is the solution to the first lab exercise where the client sends two values to a single server (the calculator) which does all the operations and returns the result.
 * [P05_1_calculator_pro](P05_1_calculator_pro) is the solution to the second lab exercise. The client receives the IP addresses and ports of the servers via the terminal. One server performs addition and subtraction and the other division and multiplication, each returning the result to the client.
-<!---
-* [CD22_23-P05_2_bank](CD22_23-P05_2_bank) as an example of a simulation of a real-life problem or situation. It requires the compilers `slice2py` (currently under the Anaconda environment) and `slice2cpp` (installation details can be found [here][ice-cpp]). Makefile included. It currently only works with localhost.
--->
+* [P05_2_bank](P05_2_bank) as an example of a simulation of a real-life problem or situation. It requires the compilers `slice2py` (currently under the Anaconda environment) and `slice2cpp` (installation details can be found [here][ice-cpp]). Makefile included. It currently only works with localhost.
 
 ## License
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
