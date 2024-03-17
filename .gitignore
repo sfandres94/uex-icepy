@@ -6,7 +6,11 @@ __pycache__
 *_ice.py
 *.o
 
-# Custom folders.
+# Custom folders and files.
 Printer/
 Calculator/
 CalculatorPro/
+Bank.cpp
+Bank.h
+Bank/
+client
