@@ -10,7 +10,8 @@ __pycache__
 Printer/
 Calculator/
 CalculatorPro/
+Bank/
 Bank.cpp
 Bank.h
-Bank/
 client
+NumberGuessingGame/
