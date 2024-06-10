@@ -48,7 +48,7 @@ slice2py <filename>.ice
 ```
 where `<filename>` must be replaced by the name of the target Slice definitions.
 
-Start the server on a terminal or dedicated hardware. Then start the client on another terminal or hardware unit.
+Start the server on a terminal or dedicated hardware, then start the client on another terminal or hardware unit.
 
 ## Code examples
 The examples are organized in folders:
